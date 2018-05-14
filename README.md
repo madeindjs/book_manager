@@ -25,28 +25,55 @@ Création d'un projet
 
 ### Cahier des charges
 
-- gestion des livres _(B/A)_
+Affichage du livre
 
-| nom                               | autheur     | editeur | publieur | date publication |
-|-----------------------------------|-------------|---------|----------|------------------|
-| Harry Potter: l'école des sorcier | JK. Rolling | ??      | ??       | 2010             |
+- affichages des prêts
+- afichage des marques pages
 
-- gestion des favoris _(A)_
-- gestion des marques pages pour les livres _(B)_
+Gestion des livres _(B/A)_
+
+- un bouton pour voir un livre
+- un bouton pour ajouter un livre
+- un bouton pour modifier un livre
+- un bouton pour supprimer un livre
+- affichage du tableau
+
+| nom                               | autheur     | editeur | publieur | date publication | qté |
+|-----------------------------------|-------------|---------|----------|------------------|-----|
+| Harry Potter: l'école des sorcier | JK. Rolling | ??      | ??       | 2010             | 5   |
+
+
+Gestion des favoris _(A)_
+
+- un bouton pour ajouter un favori
+- un bouton pour modifier un favori
+- un bouton pour supprimer un favori
+- un bouton exporter en XML
+
+Gestion des marques pages pour les livres _(B)_
+
+- un bouton pour ajouter un marque-page
+- un bouton pour modifier un marque-page
+- un bouton pour supprimer un marque-page
+- un bouton exporter
 
 | Livre                             | page | date       |
 |-----------------------------------|------|------------|
 | Harry Potter: l'école des sorcier | 150  | 11/05/2010 |
 
-- gestion des prêt des livres _(B)_
+Gestion des prêt des livres _(B)_
+
+- un bouton pour commencer un prêt
+- un bouton pour signaler un retour
+- un bouton exporter en XML
 
 | Livre                             | who  | begin_at   | end_on     |
 |-----------------------------------|------|------------|------------|
 | Harry Potter: l'école des sorcier | Eric | 11/05/2010 | 01/04/2011 |
+| Harry Potter: l'école des sorcier | Eric | 11/05/2015 | 01/04/2016 |
 
-- export des données en XML, JSON et CSV _(A)_
 
-Exemple XML
+Exemple export en XML
 
 ```XML
 <root>
@@ -63,6 +90,8 @@ Exemple XML
 </root>
 ```
 
-### Tableaux
+### Charte graphique
 
-#### liste des livres
+La couleur choisie est **le violet** car cette couleur véhicule des valeurs de sérénité et de spiritualité et peut être associée à la prospérité et à la noblesse.
+
+La font choisie est [**YoungSerif**](https://github.com/uplaod/YoungSerif) qui imite la police utilisée dans l'imprimmerie mais en plus moderne.
