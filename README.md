@@ -26,9 +26,24 @@ Création d'un projet
 ### Cahier des charges
 
 - gestion des livres _(B/A)_
+
+| nom                               | autheur     | editeur | publieur | date publication |
+|-----------------------------------|-------------|---------|----------|------------------|
+| Harry Potter: l'école des sorcier | JK. Rolling | ??      | ??       | 2010             |
+
 - gestion des favoris _(A)_
 - gestion des marques pages pour les livres _(B)_
+
+| Livre                             | page | date       |
+|-----------------------------------|------|------------|
+| Harry Potter: l'école des sorcier | 150  | 11/05/2010 |
+
 - gestion des prêt des livres _(B)_
+
+| Livre                             | who  | begin_at   | end_on     |
+|-----------------------------------|------|------------|------------|
+| Harry Potter: l'école des sorcier | Eric | 11/05/2010 | 01/04/2011 |
+
 - export des données en XML, JSON et CSV _(A)_
 
 Exemple XML
@@ -48,4 +63,6 @@ Exemple XML
 </root>
 ```
 
-### Etapes
+### Tableaux
+
+#### liste des livres
