@@ -1,0 +1,19 @@
+{
+  "name": "book_manager",
+  "version": "1.0.0",
+  "description": "--- title: Cours de Javascript begin: 2018-05-14 end: 2018-05-18 --- # Javascript",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://18.197.99.90/arousseau/book_manager.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^2.0.0"
+  }
+}
