@@ -1,8 +1,7 @@
 const ViewHelper = require('./js/ViewHelper.js')
-const StorageHelper = require('./js/StorageHelper.js')
+const Book = require('./js/Book.js')
 
 let viewHelper = new ViewHelper()
-let storageHelper = new StorageHelper()
 
 document.querySelector('aside ul').addEventListener('click', (e) => {
   let target = e.target
@@ -10,11 +9,6 @@ document.querySelector('aside ul').addEventListener('click', (e) => {
   if(e.target.nodeName == 'LI'){
     viewHelper.showTab(e.target.dataset.link)
   }
-})
-
-storageHelper.add({
-  name: 'Alex',
-  value: 'Rousseau'
 })
 
 
@@ -32,4 +26,21 @@ document.getElementById('new_mark_button').addEventListener('click', (e) => {
 
 document.getElementById('new_lend_button').addEventListener('click', (e) => {
   viewHelper.showTab('new_lend');
+})
+
+
+document.getElementById('book_form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  let formData = new FormData(document.getElementById('book_form'));
+  // create book from form
+  let book = new Book()
+  book.name = formData.get('name')
+  book.author = formData.get('author')
+  book.editor = formData.get('editor')
+  book.created_at = formData.get('created_at')
+  // save & display books
+  book.save()
+  viewHelper.showTab('books')
+
+
 })
