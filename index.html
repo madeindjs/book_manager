@@ -3,38 +3,58 @@
     <head>
       <meta charset="UTF-8">
       <title>Hello World!</title>
+      <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="css/style.css">
     </head>
-    <body>
+    <body class="container-fluid">
 
-      <aside>
-        <ul>
-          <li data-link="books">Livres</li>
-          <li data-link="favs">Favoris</li>
-          <li data-link="mark">Marques-pages</li>
-          <li data-link="lend">Prêts</li>
-        </ul>
-      </aside>
+      <div class="row">
+        <aside class="col-xs-4 col-sm-3 col-md-2 bg-primary">
+          <ul class="list-unstyled">
+            <li data-link="books">Livres</li>
+            <li data-link="favs">Favoris</li>
+            <li data-link="mark">Marques-pages</li>
+            <li data-link="lend">Prêts</li>
+          </ul>
+        </aside>
 
-      <main>
+        <main class="col-xs-8 col-sm-9 col-md-10">
 
-        <section data-view="books" class="hidden">
-          <h1>Livres</h1>
-        </section>
+          <section data-view="books">
+            <h1 class="text-primary">Livres</h1>
+            <table class="table">
+              <tr>
+                <th>Nom</th>
+                <th>Autheur</th>
+                <th>Publieur</th>
+              </tr>
+            </table>
 
-        <section data-view="favs" class="hidden">
-          <h1>Favoris</h1>
-        </section>
+            <p class="text-center">
+              <button type="button" name="button" class="btn btn-primary">Ajouter livre</button>
+            </p>
 
-        <section data-view="mark" class="hidden">
-          <h1>Marques-pages</h1>
-        </section>
+          </section>
 
-        <section data-view="lend" class="hidden">
-          <h1>Prêts</h1>
-        </section>
+          <section data-view="favs" class="hidden">
+            <h1 class="text-primary">Favoris</h1>
+          </section>
 
-      </main>
+          <section data-view="mark" class="hidden">
+            <h1 class="text-primary">Marques-pages</h1>
+          </section>
+
+          <section data-view="lend" class="hidden">
+            <h1 class="text-primary">Prêts</h1>
+          </section>
+
+        </main>
+
+      </div>
+
+
+
+
 
       <!-- <script type="text/javascript" src="./js/ViewHelper.js"></script> -->
 
