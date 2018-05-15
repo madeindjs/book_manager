@@ -5,8 +5,10 @@
       <title>Hello World!</title>
       <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/font-awesome.css">
+      <link rel="stylesheet" href="css/font-awesome.min.css">
     </head>
-    <body class="container-fluid">
+    <body class="container-fluid text-center">
 
       <div class="row">
         <aside class="col-xs-4 col-sm-3 col-md-2 bg-primary">
@@ -24,9 +26,18 @@
             <h1 class="text-primary">Livres</h1>
             <table class="table">
               <tr>
-                <th>Nom</th>
-                <th>Autheur</th>
-                <th>Publieur</th>
+                <th>Nom du livre : </th>
+                <th>Autheur : </th>
+                <th>Editeur : </th>
+                <th>Date de publication : </th>
+                <th>Quantité : </th>
+              </tr>
+              <tr class="text-center">
+                  <td>Harry Potter : A l'école des sorcier</td>
+                  <td>J.K. Rowling</td>
+                  <td>Gallimard Jeunesse</td>
+                  <td>22/10/2015</td>
+                  <td>5</td>
               </tr>
             </table>
 
@@ -40,28 +51,28 @@
             <h1 class="text-primary">Créer un livre</h1>
             <form>
               <div class="form-group">
-                <label for="name">Nom du livre</label>
+                <label for="name">Nom du livre : </label>
                 <input type="text" class="form-control" name="name" placeholder="Harry Potter">
               </div>
 
               <div class="form-group">
-                <label for="author">Autheur</label>
+                <label for="author">Autheur : </label>
                 <input type="text" class="form-control" name="author" placeholder="JK. Rowling">
               </div>
 
               <div class="form-group">
-                <label for="editor">Editeur</label>
+                <label for="editor">Editeur : </label>
                 <input type="text" class="form-control" name="editor" placeholder="Galimard">
               </div>
 
 
               <div class="form-group">
-                <label for="created_at">Date de publication</label>
+                <label for="created_at">Date de publication : </label>
                 <input type="date" class="form-control" name="created_at">
               </div>
 
               <div class="form-group">
-                <label for="quantity">Quantité</label>
+                <label for="quantity">Quantité : </label>
                 <input type="number " class="form-control" name="quantity" placeholder="2">
               </div>
 
@@ -72,22 +83,151 @@
 
           <section data-view="favs" class="hidden">
             <h1 class="text-primary">Favoris</h1>
+            <table class="table">
+              <tr class="text-center">
+                <th>Nom</th>
+                <th>Autheur</th>
+                <th>Editeur</th>
+              </tr>
+              <tr class="text-center">
+                  <td>Harry Potter : A l'école des sorcier</td>
+                  <td>J.K. Rowling</td>
+                  <td>Gallimard Jeunesse</td>
+              </tr>
+            </table>
+
+            <p class="text-center">
+              <button id="new_favs_button" type="button" name="button" class="btn btn-primary">Ajouter un favoris</button>
+            </p>
+
+          </section>
+
+          <section data-view="add_fav" class="hidden" >
+
+            <h1 class="text-primary">Ajouter votre livre favoris</h1>
+            <form>
+              <div class="form-group">
+                <label for="name_book">Nom du livre : </label>
+                <input type="text" class="form-control" name="name_book" placeholder="Harry Potter">
+              </div>
+
+              <div class="form-group">
+                <label for="name">Autheur : </label>
+                <input type="text" class="form-control" name="name" placeholder="J.K. Rowling">
+              </div>
+
+              <div class="form-group">
+                <label for="editor">Editeur : </label>
+                <input type="text" class="form-control" name="editor" placeholder="Gallimard">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Ajouter votre livre</button>
+
+            </form>
+
           </section>
 
           <section data-view="mark" class="hidden">
             <h1 class="text-primary">Marques-pages</h1>
+              <table class="table">
+                <tr>
+                  <th>Nom du Livre : </th>
+                  <th>Page : </th>
+                  <th>Date derniere lecture : </th>
+                </tr>
+                <tr class="text-center">
+                    <td>Harry Potter : A l'école des sorcier</td>
+                    <td>150</td>
+                    <td>10/11/2015</td>
+                </tr>
+              </table>
+
+            <p class="text-center">
+              <button id="new_mark_button" type="button" name="button" class="btn btn-primary">Ajouter votre marque-page</button>
+            </p>
+
+          </section>
+
+          <section data-view="new_mark" class="hidden">
+            <h1 class="text-primary"> Ajouter votre marques-pages : </h1>
+            <form>
+              <div class="form-group">
+                <label for="name_of_book">Nom du livre : </label>
+                <input type="text" class="form-control" name="name_of_book" placeholder="Harry Potter">
+              </div>
+
+              <div class="form-group">
+                <label for="page">Page : </label>
+                <input type="number" class="form-control" name="page" placeholder="2">
+              </div>
+
+              <div class="form-group">
+                <label for="date_read_at">Date dernière lecture : </label>
+                <input type="date" class="form-control" name="date_read_at">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Ajouter votre marque-page</button>
+
+            </form>
           </section>
 
           <section data-view="lend" class="hidden">
             <h1 class="text-primary">Prêts</h1>
+
+            <table class="table">
+              <tr>
+                <th>Nom du Livre : </th>
+                <th>Personne : </th>
+                <th>Debut du prêt : </th>
+                <th>Fin du prêt : </th>
+              </tr>
+              <tr class="text-center">
+                  <td>Harry Potter : A l'école des sorcier</td>
+                  <td> Doctor Strange </td>
+                  <td>10/11/2015</td>
+                  <td>10/01/2016</td>
+              </tr>
+            </table>
+
+            <p class="text-center">
+              <button id="new_lend_button" type="button" name="button" class="btn btn-primary">Ajouter votre prêt</button>
+            </p>
+
+          </section >
+
+          <section data-view="new_lend" class="hidden">
+
+            <h1 class="text-primary"> Ajouter votre prêt</h1>
+
+            <form>
+              <div class="form-group">
+                <label for="nameBook">Nom du livre : </label>
+                <input type="text" class="form-control" name="nameBook" placeholder="Harry Potter">
+              </div>
+
+              <div class="form-group">
+                <label for="personne">Personne : </label>
+                <input type="text" class="form-control" name="persone" placeholder="hoodini">
+              </div>
+
+              <div class="form-group">
+                <label for="created_at">Debut du prêt : </label>
+                <input type="date" class="form-control" name="created_lend_at">
+              </div>
+
+              <div class="form-group">
+                <label for="created_at">Fin du prêt : </label>
+                <input type="date" class="form-control" name="end_at">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Ajouter votre emprunt</button>
+
+            </form>
           </section>
 
         </main>
 
       </div>
-
-
-
 
 
       <!-- <script type="text/javascript" src="./js/ViewHelper.js"></script> -->
