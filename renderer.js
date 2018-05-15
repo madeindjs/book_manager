@@ -14,3 +14,15 @@ document.querySelector('aside ul').addEventListener('click', (e) => {
 document.getElementById('new_book_button').addEventListener('click', (e) => {
   viewHelper.showTab('new_book');
 })
+
+document.getElementById('new_favs_button').addEventListener('click', (e) => {
+  viewHelper.showTab('add_fav');
+})
+
+document.getElementById('new_mark_button').addEventListener('click', (e) => {
+  viewHelper.showTab('new_mark');
+})
+
+document.getElementById('new_lend_button').addEventListener('click', (e) => {
+  viewHelper.showTab('new_lend');
+})
