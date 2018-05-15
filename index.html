@@ -3,11 +3,43 @@
     <head>
       <meta charset="UTF-8">
       <title>Hello World!</title>
+      <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-      <h1>Hello World!</h1>
-      Nous utilisons Node <script>document.write(process.versions.node)</script>,
-      Chrome <script>document.write(process.versions.chrome)</script>,
-      et Electron <script>document.write(process.versions.electron)</script>.
+
+      <aside>
+        <ul>
+          <li data-link="books">Livres</li>
+          <li data-link="favs">Favoris</li>
+          <li data-link="mark">Marques-pages</li>
+          <li data-link="lend">Prêts</li>
+        </ul>
+      </aside>
+
+      <main>
+
+        <section data-view="books" class="hidden">
+          <h1>Livres</h1>
+        </section>
+
+        <section data-view="favs" class="hidden">
+          <h1>Favoris</h1>
+        </section>
+
+        <section data-view="mark" class="hidden">
+          <h1>Marques-pages</h1>
+        </section>
+
+        <section data-view="lend" class="hidden">
+          <h1>Prêts</h1>
+        </section>
+
+      </main>
+
+      <!-- <script type="text/javascript" src="./js/ViewHelper.js"></script> -->
+
+      <script>
+        require('./renderer.js')
+      </script>
     </body>
   </html>
