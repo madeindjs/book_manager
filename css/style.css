@@ -1,3 +1,22 @@
+@font-face {
+    font-family: YoungSerif;
+    src: url(font/YoungSerif-Regular.woff2);
+}
+
+
 .hidden {
   display: none;
+}
+
+
+h1, h2 {
+  font-family: YoungSerif;
+}
+
+h1 {
+  font-size: 2.5rem
+}
+
+h1, h2, strong {
+  color: indigo;
 }
