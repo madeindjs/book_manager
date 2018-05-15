@@ -7,7 +7,12 @@
 .hidden {
   display: none;
 }
-
+.logo{
+  height: 7vh;
+  margin-left: 2%;
+  background-color: indigo;
+  clip-path: polygon(66% 0, 66% 100%, 62% 74%, 58% 101%, 58% 0);
+}
 
 h1, h2 {
   font-family: YoungSerif;
@@ -26,7 +31,7 @@ aside ul li{
   /*font-family: YoungSerif;*/
   text-align: center;
   font-size: 2rem;
-  line-height: 25vh;
+  line-height: 20vh;
 }
 table{
   margin-top: 30%
