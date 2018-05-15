@@ -9,3 +9,8 @@ document.querySelector('aside ul').addEventListener('click', (e) => {
     viewHelper.showTab(e.target.dataset.link);
   }
 })
+
+
+document.getElementById('new_book_button').addEventListener('click', (e) => {
+  viewHelper.showTab('new_book');
+})
