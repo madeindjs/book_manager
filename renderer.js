@@ -3,33 +3,18 @@ const Book = require('./js/Book.js')
 const Fav = require('./js/Fav.js')
 
 
+
 let appVue = new Vue({
   el: '#app',
 
   data: {
-    books: [
-      {
-        name: "Harry Potter : A l'école des sorcier",
-        author: 'J.K. Rowling',
-        editor: 'Gallimard Jeunesse',
-        created_at: '22/10/2015',
-        quantity: 5,
-      },
-    ],
-    favs: [
-      {
-        name: "Harry Potter : A l'école des sorcier",
-        author: 'J.K. Rowling',
-        editor: 'Gallimard Jeunesse',
-      },
-    ]
   },
   methods: {
     addBook: function () {
       let book = new Book()
       book.importFormData(new FormData(document.getElementById('book_form')))
       book.save()
-
+      this.books = (new Book()).all() // reload
       viewHelper.showTab('books')
 
 
@@ -53,8 +38,7 @@ let appVue = new Vue({
         name: fav.name,
         author: fav.author,
         editor: fav.editor,
-      })
-    }
+      })    }
   },
 
 })
