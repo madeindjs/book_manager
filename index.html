@@ -117,11 +117,15 @@
                 <th>Editeur</th>
                 <th>Action</th>
               </tr>
+              <!-- Utilisation du framework Vuejs
+                  le tag v-for corresponda un foreach du formulaire fav_form   -->
               <tr class="text-center" v-for="fav in favs">
                   <td>{{ fav.name }}</td>
                   <td>{{ fav.author }}</td>
                   <td>{{ fav.editor }}</td>
                   <td>
+                        <!-- Permet de recuperer l'id dans le formulaire
+                        et le tag v-on:click correspond a un onclick en Vuejs -->
                     <button class="btn btn-danger" :id="fav.id" v-on:click="deleteFav">
                       Supprimer
                     </button>
@@ -138,7 +142,8 @@
           <section data-view="add_fav" class="hidden" >
 
             <h1 class="text-primary">Ajouter votre livre favoris</h1>
-
+            <!-- On ajoute un id sur le formualaire afin de le recuperer
+                On fait appel a la méthode qui a été créer dans renderer  -->
             <form id ="fav_form" @submit.prevent="addFav">
               <div class="form-group">
                 <label for="name">Nom du livre : </label>
@@ -278,6 +283,8 @@
 
       </div>
 
+
+      <!-- Ajout du CDN pour utiliser le framework js Vuejs -->
       <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
       <!-- <script type="text/javascript" src="./js/ViewHelper.js"></script> -->
 

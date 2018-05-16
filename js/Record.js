@@ -1,9 +1,9 @@
 module.exports = class Record {
-
+  // variable static qui donne la clé enregistré
   static getDbKey() {
     return 'record'// to implement
   }
-
+// Recupere tous les entrée en Json du localStarage
   static all() {
     let all = JSON.parse(localStorage.getItem(this.getDbKey()))
     if(all === undefined) {
@@ -45,9 +45,10 @@ module.exports = class Record {
     localStorage.setItem(this.constructor.getDbKey(), JSON.stringify(values))
   }
 
-
   static delete(id) {
+    //return tous les id qui ne sont pas les meme ue celui que l'on veut pour ensuite
     let all = this.all().filter((el) => {return el['id'] != id})
+    // pour ensuite enregistrer
     localStorage.setItem(this.getDbKey(), JSON.stringify(all))
   }
 
