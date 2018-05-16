@@ -22,6 +22,15 @@ let appVue = new Vue({
       this.books = Book.all() // reload
       viewHelper.showTab('books')
     },
+    updateBook: function(e) {
+      let book = Book.where('id', e.target.id)
+
+      debugger
+
+      document.querySelector('#book_form input[name="name"]').value = book.name
+
+      viewHelper.showTab('new_book')
+    },
     deleteBook: function(e) {
       // let book = Book.where('id', e.target.id)
       // console.log(book)

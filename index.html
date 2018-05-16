@@ -59,6 +59,9 @@
                   <td>{{ book.created_at }}</td>
                   <td>{{ book.quantity }}</td>
                   <td>
+                    <button class="btn btn-warning" :id="book.id" v-on:click="updateBook">
+                      Modifier
+                    </button>
                     <button class="btn btn-danger" :id="book.id" v-on:click="deleteBook">
                       Supprimer
                     </button>
