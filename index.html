@@ -12,14 +12,28 @@
       <div id="app" class="row">
         <aside class="col-xs-4 col-sm-3 col-md-2 bg-primary">
           <ul class="list-unstyled">
-            <i class="fas fa-book fa-3x"></i>
-            <li data-link="books">Livres</li>
-            <i class="far fa-star fa-3x"></i>
-            <li data-link="favs">Favoris</li>
-            <i class="far fa-bookmark fa-3x"></i>
-            <li data-link="mark">Marques-pages</li>
-            <i class="fas fa-exchange-alt fa-3x"></i>
-            <li data-link="lend">Prêts</li>
+
+              <div class="square">
+               <i class="fas fa-book fa-3x"></i>
+               <li data-link="books">Livres</li>
+              </div>
+
+              <div class="square">
+               <i class="far fa-star fa-3x"></i>
+               <li data-link="favs">Favoris</li>
+              </div>
+
+              <div class="square">
+               <i class="far fa-bookmark fa-3x"></i>
+               <li data-link="mark">Marques-pages</li>
+              </div>
+
+              <div class="square">
+               <i class="fas fa-exchange-alt fa-3x"></i>
+               <li data-link="lend">Prêts</li>
+              </div>
+
+
           </ul>
         </aside>
 
@@ -57,7 +71,8 @@
 
           <section data-view="new_book" class="hidden">
             <h1 class="text-primary">Créer un livre</h1>
-            <form id="book_form">
+
+            <form>
               <div class="form-group">
                 <label for="name">Nom du livre : </label>
                 <input type="text" class="form-control" name="name" placeholder="Harry Potter">
@@ -87,6 +102,7 @@
               <button type="submit" class="btn btn-primary">Créer</button>
 
             </form>
+
           </section>
 
           <section data-view="favs" class="hidden">

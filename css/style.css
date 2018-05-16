@@ -13,7 +13,19 @@
   background-color: indigo;
   clip-path: polygon(66% 0, 66% 100%, 62% 74%, 58% 101%, 58% 0);
 }
-
+.square{
+  margin: 10px auto;
+  cursor: pointer;
+}
+.square:hover i{
+	opacity: 0.5;
+}
+.square:hover i:hover{
+	opacity: 1.5;
+}
+.square i{
+  cursor:
+}
 h1, h2 {
   font-family: YoungSerif;
 }
@@ -21,7 +33,6 @@ h1, h2 {
 h1 {
   font-size: 3rem
 }
-
 
 aside {
   height: 100vh;
@@ -31,7 +42,7 @@ aside ul li{
   /*font-family: YoungSerif;*/
   text-align: center;
   font-size: 2rem;
-  line-height: 20vh;
+  line-height: 15vh;
 }
 table{
   margin-top: 30%
