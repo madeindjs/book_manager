@@ -1,5 +1,6 @@
 const ViewHelper = require('./js/ViewHelper.js')
 const Book = require('./js/Book.js')
+const Fav = require('./js/Fav.js')
 
 
 
@@ -7,7 +8,8 @@ let appVue = new Vue({
   el: '#app',
 
   data: {
-    books: Book.all()
+    books: Book.all(),
+    favs: Fav.all(),
   },
   methods: {
     addBook: function () {
@@ -23,8 +25,17 @@ let appVue = new Vue({
 
       Book.delete(e.target.id)
       this.books = Book.all()
+    },
+    addFav: function () {
+      let fav = new Fav()
+      fav.importFormData(new FormData(document.getElementById('fav_form')))
+      fav.save()
+
+      viewHelper.showTab('favs')
+
+      this.favs = Fav.all()
     }
-  },
+  }
 })
 
 
