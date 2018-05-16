@@ -2,36 +2,20 @@ const ViewHelper = require('./js/ViewHelper.js')
 const Book = require('./js/Book.js')
 
 
+
 let appVue = new Vue({
   el: '#app',
 
   data: {
-    books: [
-      {
-        name: "Harry Potter : A l'école des sorcier",
-        author: 'J.K. Rowling',
-        editor: 'Gallimard Jeunesse',
-        created_at: '22/10/2015',
-        quantity: 5,
-      },
-    ]
+    books: (new Book()).all()
   },
   methods: {
     addBook: function () {
       let book = new Book()
       book.importFormData(new FormData(document.getElementById('book_form')))
       book.save()
-
+      this.books = (new Book()).all() // reload
       viewHelper.showTab('books')
-
-
-      this.books.push({
-        name: book.name,
-        author: book.author,
-        editor: book.editor,
-        created_at: book.created_at,
-        quantity: book.quantity,
-      })
     }
   },
 })
