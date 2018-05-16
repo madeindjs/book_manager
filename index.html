@@ -111,10 +111,10 @@
                 <th>Autheur</th>
                 <th>Editeur</th>
               </tr>
-              <tr class="text-center">
-                  <td>Harry Potter : A l'école des sorcier</td>
-                  <td>J.K. Rowling</td>
-                  <td>Gallimard Jeunesse</td>
+              <tr class="text-center" v-for="fav in favs">
+                  <td>{{ fav.name }}</td>
+                  <td>{{ fav.author }}</td>
+                  <td>{{ fav.editor }}</td>
               </tr>
             </table>
 
@@ -127,15 +127,16 @@
           <section data-view="add_fav" class="hidden" >
 
             <h1 class="text-primary">Ajouter votre livre favoris</h1>
-            <form>
+
+            <form id ="fav_form" @submit.prevent="addFav">
               <div class="form-group">
-                <label for="name_book">Nom du livre : </label>
-                <input type="text" class="form-control" name="name_book" placeholder="Harry Potter">
+                <label for="name">Nom du livre : </label>
+                <input type="text" class="form-control" name="name" placeholder="Harry Potter">
               </div>
 
               <div class="form-group">
-                <label for="name">Autheur : </label>
-                <input type="text" class="form-control" name="name" placeholder="J.K. Rowling">
+                <label for="author">Autheur : </label>
+                <input type="text" class="form-control" name="author" placeholder="J.K. Rowling">
               </div>
 
               <div class="form-group">

@@ -1,5 +1,6 @@
 const ViewHelper = require('./js/ViewHelper.js')
 const Book = require('./js/Book.js')
+const Fav = require('./js/Fav.js')
 
 
 let appVue = new Vue({
@@ -13,6 +14,13 @@ let appVue = new Vue({
         editor: 'Gallimard Jeunesse',
         created_at: '22/10/2015',
         quantity: 5,
+      },
+    ],
+    favs: [
+      {
+        name: "Harry Potter : A l'école des sorcier",
+        author: 'J.K. Rowling',
+        editor: 'Gallimard Jeunesse',
       },
     ]
   },
@@ -32,8 +40,23 @@ let appVue = new Vue({
         created_at: book.created_at,
         quantity: book.quantity,
       })
+    },
+    addFav: function () {
+      let fav = new Fav()
+      fav.importFormData(new FormData(document.getElementById('fav_form')))
+      fav.save()
+
+      viewHelper.showTab('favs')
+
+
+      this.favs.push({
+        name: fav.name,
+        author: fav.author,
+        editor: fav.editor,
+      })
     }
   },
+
 })
 
 
