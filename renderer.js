@@ -2,6 +2,7 @@ const ViewHelper = require('./js/ViewHelper.js')
 const Book = require('./js/Book.js')
 const Fav = require('./js/Fav.js')
 const Mark = require('./js/Mark.js')
+const Lend = require('./js/Lend.js')
 
 
 
@@ -11,7 +12,8 @@ let appVue = new Vue({
   data: {
     books: Book.all(),
     favs: Fav.all(),
-    marks: Mark.all()
+    marks: Mark.all(),
+    lends: Lend.all()
   },
   methods: {
     addBook: function () {
@@ -39,9 +41,18 @@ let appVue = new Vue({
 
       this.marks = Mark.all()
     },
+    addLend: function () {
+      let lend = new Lend()
+      lend.importFormData(new FormData(document.getElementById('lend_form')))
+      lend.save()
+
+      viewHelper.showTab('lend')
+
+      this.lends = Lend.all()
+    },
     deleteBook: function(e) {
-      let book = Book.where('id', e.target.id)
-      console.log(book)
+      //let book = Book.where('id', e.target.id)
+      //console.log(book)
 
       Book.delete(e.target.id)
       this.books = Book.all()
@@ -53,6 +64,10 @@ let appVue = new Vue({
     deleteMark: function(e) {
       Mark.delete(e.target.id)
       this.marks = Mark.all()
+    },
+    deleteLend: function(e) {
+      Lend.delete(e.target.id)
+      this.lends = Lend.all()
     }
   }
 })

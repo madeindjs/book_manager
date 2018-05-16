@@ -2,7 +2,7 @@
   <html>
     <head>
       <meta charset="UTF-8">
-      <title>Hello World!</title>
+      <title>Apps-Book</title>
       <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -30,7 +30,7 @@
 
               <div class="square">
                <i class="fas fa-exchange-alt fa-3x"></i>
-               <li data-link="lends">Prêts</li>
+               <li data-link="lend">Prêts</li>
               </div>
 
           </ul>
@@ -218,14 +218,20 @@
               <tr>
                 <th>Nom du Livre : </th>
                 <th>Personne : </th>
-                <th>Debut du prêt : </th>
-                <th>Fin du prêt : </th>
+                <th>Date : </th>
+                <th>Pret : </th>
+                <th>Action : </th>
               </tr>
-              <tr class="text-center">
-                  <td>Harry Potter : A l'école des sorcier</td>
-                  <td> Doctor Strange </td>
-                  <td>10/11/2015</td>
-                  <td>10/01/2016</td>
+              <tr class="text-center" v-for="lend in lends">
+                  <td>{{ lend.nameBook }}</td>
+                  <td> {{ lend.people }} </td>
+                  <td>{{ lend.date }}</td>
+                  <td>{{ lend.action }}</td>
+                  <td>
+                    <button class="btn btn-danger" :id="lend.id" v-on:click="deleteLend">
+                      Supprimer
+                    </button>
+                  </td>
               </tr>
             </table>
 
@@ -239,25 +245,28 @@
 
             <h1 class="text-primary"> Ajouter votre prêt</h1>
 
-            <form>
+            <form id="lend_form" @submit.prevent="addLend">
               <div class="form-group">
                 <label for="nameBook">Nom du livre : </label>
                 <input type="text" class="form-control" name="nameBook" placeholder="Harry Potter">
               </div>
 
               <div class="form-group">
-                <label for="personne">Personne : </label>
-                <input type="text" class="form-control" name="persone" placeholder="hoodini">
+                <label for="people">Personne : </label>
+                <input type="text" class="form-control" name="people" placeholder="hoodini">
               </div>
 
               <div class="form-group">
-                <label for="created_at">Debut du prêt : </label>
-                <input type="date" class="form-control" name="created_lend_at">
+                <label for="date">Date : </label>
+                <input type="date" class="form-control" name="date">
               </div>
 
               <div class="form-group">
-                <label for="created_at">Fin du prêt : </label>
-                <input type="date" class="form-control" name="end_at">
+                <label for="lend">Prêt : </label>
+                  <select name="action" class="form-control">
+                   <option value="Emprunter" >Emprunter</option>
+                   <option value="Retour">Retour</option>
+                  </select>
               </div>
 
               <button type="submit" class="btn btn-primary">Ajouter votre emprunt</button>
