@@ -68,6 +68,7 @@
 
             <p class="text-center">
               <button id="new_book_button" type="button" name="button" class="btn btn-primary">Ajouter livre</button>
+              <button class="btn tbn-default" v-on:click="exportBooks">Exporter</button>
             </p>
 
           </section>
@@ -77,17 +78,17 @@
 
             <form id="book_form" @submit.prevent="addBook">
               <div class="form-group">
-                <label for="name">Nom du livre : </label>
+                <label for="name">Nom du livre</label>
                 <input type="text" class="form-control" name="name" placeholder="Harry Potter">
               </div>
 
               <div class="form-group">
-                <label for="author">Autheur : </label>
+                <label for="author">Autheur</label>
                 <input type="text" class="form-control" name="author" placeholder="JK. Rowling">
               </div>
 
               <div class="form-group">
-                <label for="editor">Editeur : </label>
+                <label for="editor">Editeur</label>
                 <input type="text" class="form-control" name="editor" placeholder="Galimard">
               </div>
 

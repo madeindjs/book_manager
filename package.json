@@ -15,5 +15,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^2.0.0"
+  },
+  "dependencies": {
+    "xml-js": "^1.6.2"
   }
 }

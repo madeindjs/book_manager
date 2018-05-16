@@ -1,7 +1,10 @@
+const {dialog} = require("electron").remote;
+const fs = require('fs')
+const convert = require('xml-js')
+
 const ViewHelper = require('./js/ViewHelper.js')
 const Book = require('./js/Book.js')
 const Fav = require('./js/Fav.js')
-
 
 
 let appVue = new Vue({
@@ -20,11 +23,45 @@ let appVue = new Vue({
       viewHelper.showTab('books')
     },
     deleteBook: function(e) {
-      let book = Book.where('id', e.target.id)
-      console.log(book)
+      // let book = Book.where('id', e.target.id)
+      // console.log(book)
 
       Book.delete(e.target.id)
       this.books = Book.all()
+    },
+    exportBooks: function() {
+      // show save dialog
+      let savePath = dialog.showSaveDialog({
+        title: 'Exporter les livres',
+        filters: [
+          {name: 'Fichier CSV', extensions: ['csv']},
+          {name: 'Fichier XML', extensions: ['xml']},
+          {name: 'Fichier JSON', extensions: ['json']},
+        ]
+      })
+
+      let extension = savePath.split('.').pop()
+      let fileData = ''
+      let allBooks = Book.all()
+
+      switch (extension) {
+        case 'csv':
+          fileData = allBooks.map((book) => {
+                               return book.name + ";" + book.author + ";" + book.editor + ";" + book.created_at + ";" + book.quantity
+                             })
+                            .join('\r\n')
+          break;
+        case 'xml':
+          fileData = convert.js2xml(allBooks, {compact: true})
+          break;
+        case 'json':
+          fileData = JSON.stringify(allBooks)
+          break;
+      }
+
+
+      fs.writeFile(savePath, fileData, function(err) {
+      });
     },
     addFav: function () {
       let fav = new Fav()
