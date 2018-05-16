@@ -30,7 +30,7 @@
 
               <div class="square">
                <i class="fas fa-exchange-alt fa-3x"></i>
-               <li data-link="lend">Prêts</li>
+               <li data-link="lends">Prêts</li>
               </div>
 
           </ul>
@@ -115,11 +115,17 @@
                 <th>Nom</th>
                 <th>Autheur</th>
                 <th>Editeur</th>
+                <th>Action</th>
               </tr>
               <tr class="text-center" v-for="fav in favs">
                   <td>{{ fav.name }}</td>
                   <td>{{ fav.author }}</td>
                   <td>{{ fav.editor }}</td>
+                  <td>
+                    <button class="btn btn-danger" :id="fav.id" v-on:click="deleteFav">
+                      Supprimer
+                    </button>
+                  </td>
               </tr>
             </table>
 
@@ -162,11 +168,17 @@
                   <th>Nom du Livre : </th>
                   <th>Page : </th>
                   <th>Date derniere lecture : </th>
+                  <th>Action : </th>
                 </tr>
-                <tr class="text-center">
-                    <td>Harry Potter : A l'école des sorcier</td>
-                    <td>150</td>
-                    <td>10/11/2015</td>
+                <tr class="text-center" v-for="mark in marks">
+                    <td>{{ mark.name_of_book }}</td>
+                    <td>{{ mark.page }}</td>
+                    <td>{{ mark.date_read_at }}</td>
+                    <td>
+                      <button class="btn btn-danger" :id="mark.id" v-on:click="deleteMark">
+                        Supprimer
+                      </button>
+                    </td>
                 </tr>
               </table>
 
@@ -178,7 +190,7 @@
 
           <section data-view="new_mark" class="hidden">
             <h1 class="text-primary"> Ajouter votre marques-pages : </h1>
-            <form>
+            <form id= "mark_form" @submit.prevent= "addMark">
               <div class="form-group">
                 <label for="name_of_book">Nom du livre : </label>
                 <input type="text" class="form-control" name="name_of_book" placeholder="Harry Potter">
