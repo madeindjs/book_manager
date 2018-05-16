@@ -7,15 +7,22 @@ let appVue = new Vue({
   el: '#app',
 
   data: {
-    books: (new Book()).all()
+    books: Book.all()
   },
   methods: {
     addBook: function () {
       let book = new Book()
       book.importFormData(new FormData(document.getElementById('book_form')))
       book.save()
-      this.books = (new Book()).all() // reload
+      this.books = Book.all() // reload
       viewHelper.showTab('books')
+    },
+    deleteBook: function(e) {
+      let book = Book.where('id', e.target.id)
+      console.log(book)
+
+      Book.delete(e.target.id)
+      this.books = Book.all()
     }
   },
 })

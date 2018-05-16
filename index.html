@@ -33,7 +33,6 @@
                <li data-link="lend">Prêts</li>
               </div>
 
-
           </ul>
         </aside>
 
@@ -47,10 +46,11 @@
             <table class="table">
               <tr>
                 <th>Nom du livre : </th>
-                <th>Autheur : </th>
-                <th>Editeur : </th>
-                <th>Date de publication : </th>
-                <th>Quantité : </th>
+                <th>Autheur</th>
+                <th>Editeur</th>
+                <th>Date de publication</th>
+                <th>Quantité</th>
+                <th>Actions</th>
               </tr>
               <tr class="text-center" v-for="book in books">
                   <td>{{ book.name }}</td>
@@ -58,6 +58,11 @@
                   <td>{{ book.editor }}</td>
                   <td>{{ book.created_at }}</td>
                   <td>{{ book.quantity }}</td>
+                  <td>
+                    <button class="btn btn-danger" :id="book.id" v-on:click="deleteBook">
+                      Supprimer
+                    </button>
+                  </td>
               </tr>
             </table>
 
