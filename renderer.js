@@ -1,6 +1,39 @@
 const ViewHelper = require('./js/ViewHelper.js')
 const Book = require('./js/Book.js')
 
+
+let appVue = new Vue({
+  el: '#app',
+
+  data: {
+    books: [
+      {
+        name: "Harry Potter : A l'école des sorcier",
+        author: 'J.K. Rowling',
+        editor: 'Gallimard Jeunesse',
+        created_at: '22/10/2015',
+        quantity: 5,
+      },
+    ]
+  },
+  methods: {
+    addBook: function () {
+      this.books.push({
+        name: "Harry Potter : A l'école des sorcier",
+        author: 'J.K. Rowling',
+        editor: 'Gallimard Jeunesse',
+        created_at: '22/10/2015',
+        quantity: 5,
+      })
+    }
+  },
+})
+
+
+
+
+
+
 let viewHelper = new ViewHelper()
 
 document.querySelector('aside ul').addEventListener('click', (e) => {

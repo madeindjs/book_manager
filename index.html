@@ -9,7 +9,7 @@
     </head>
     <body class="container-fluid text-center">
 
-      <div class="row">
+      <div id="app" class="row">
         <aside class="col-xs-4 col-sm-3 col-md-2 bg-primary">
           <ul class="list-unstyled">
             <i class="fas fa-book fa-3x"></i>
@@ -38,14 +38,16 @@
                 <th>Date de publication : </th>
                 <th>Quantité : </th>
               </tr>
-              <tr class="text-center">
-                  <td>Harry Potter : A l'école des sorcier</td>
-                  <td>J.K. Rowling</td>
-                  <td>Gallimard Jeunesse</td>
-                  <td>22/10/2015</td>
-                  <td>5</td>
+              <tr class="text-center" v-for="book in books">
+                  <td>{{ book.name }}</td>
+                  <td>{{ book.author }}</td>
+                  <td>{{ book.editor }}</td>
+                  <td>{{ book.created_at }}</td>
+                  <td>{{ book.quantity }}</td>
               </tr>
             </table>
+
+            <button type="button" v-on:click="addBook">test</button>
 
             <p class="text-center">
               <button id="new_book_button" type="button" name="button" class="btn btn-primary">Ajouter livre</button>
@@ -235,7 +237,7 @@
 
       </div>
 
-
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
       <!-- <script type="text/javascript" src="./js/ViewHelper.js"></script> -->
 
       <script>
