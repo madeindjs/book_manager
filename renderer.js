@@ -37,11 +37,7 @@ let appVue = new Vue({
     },
     updateBook: function(e) {
       let book = Book.where('id', e.target.id)
-
-      debugger
-
       document.querySelector('#book_form input[name="name"]').value = book.name
-
       viewHelper.showTab('new_book')
     },
     deleteBook: function(e) {
@@ -62,27 +58,45 @@ let appVue = new Vue({
         ]
       })
 
+      // stop execution if user not choose any file
+      if(savePath == undefined) {
+        alert('Merci de remplir une extension valide bordel!')
+        return
+      }
+
+      // get file extension
       let extension = savePath.split('.').pop()
-      let fileData = ''
+      let fileContent = ''
       let allBooks = Book.all()
 
+      // fill fileContent following file extension
       switch (extension) {
         case 'csv':
-          fileData = allBooks.map((book) => {
+          fileContent = allBooks.map((book) => {
                                return book.name + ";" + book.author + ";" + book.editor + ";" + book.created_at + ";" + book.quantity
                              })
                             .join('\r\n')
           break;
         case 'xml':
-          fileData = convert.js2xml(allBooks, {compact: true})
+          fileContent = convert.js2xml(allBooks, {compact: true})
           break;
         case 'json':
-          fileData = JSON.stringify(allBooks)
+          fileContent = JSON.stringify(allBooks)
           break;
+        default:
+          alert('Merci de remplir une extension valide bordel!')
+          return;
       }
 
-
-      fs.writeFile(savePath, fileData, function(err) {
+      // create file with fileContent
+      fs.writeFile(savePath, fileContent, function(err) {
+        if(err) {
+          // handle error
+          alert("Le fichier n'a pas pu être sauvegardé")
+        }else {
+          // display success
+          alert("Le fichier a été sauvegardé")
+        }
       });
     },
     addFav: function () {
