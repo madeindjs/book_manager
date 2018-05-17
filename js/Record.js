@@ -9,6 +9,12 @@ module.exports = class Record {
     if (all === undefined) {
       return []
     }
+
+    // sort item by ids
+    all.sort((a, b) => {
+      return a.id > b.id
+    })
+
     return all
   }
 
@@ -80,15 +86,6 @@ module.exports = class Record {
     // pour ensuite enregistrer
     localStorage.setItem(this.getDbKey(), JSON.stringify(all))
   }
-
-  // getById(id) {
-  //   let values = this.all()
-  //   if(values[id] === undefined) {
-  //     return {error: true, message: 'Cannot find element for id ' + id}
-  //   }
-  //   return values[id]
-  // }
-
 
 
 }
