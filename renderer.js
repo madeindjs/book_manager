@@ -99,6 +99,58 @@ let appVue = new Vue({
         }
       });
     },
+    exportFavs: function() {
+      // show save dialog
+      let savePath = dialog.showSaveDialog({
+        title: 'Exporter vos favoris',
+        filters: [
+          {name: 'Fichier CSV', extensions: ['csv']},
+          {name: 'Fichier XML', extensions: ['xml']},
+          {name: 'Fichier JSON', extensions: ['json']},
+        ]
+      })
+
+      // stop execution if user not choose any file
+      if(savePath == undefined) {
+        alert('Merci de remplir une extension valide bordel!')
+        return
+      }
+
+      // get file extension
+      let extension = savePath.split('.').pop()
+      let fileContent = ''
+      let allFavs = Fav.all()
+
+      // fill fileContent following file extension
+      switch (extension) {
+        case 'csv':
+          fileContent = allFavs.map((fav) => {
+                               return fav.name + ";" + fav.author + ";" + fav.editor + ";"
+                             })
+                            .join('\r\n')
+          break;
+        case 'xml':
+          fileContent = convert.js2xml(allFavs, {compact: true})
+          break;
+        case 'json':
+          fileContent = JSON.stringify(allFavs)
+          break;
+        default:
+          alert('Merci de remplir une extension valide bordel!')
+          return;
+      }
+
+      // create file with fileContent
+      fs.writeFile(savePath, fileContent, function(err) {
+        if(err) {
+          // handle error
+          alert("Le fichier n'a pas pu être sauvegardé")
+        }else {
+          // display success
+          alert("Le fichier a été sauvegardé")
+        }
+      });
+    },
     addFav: function () {
       let fav = new Fav()
       fav.importFormData(new FormData(document.getElementById('fav_form')))
