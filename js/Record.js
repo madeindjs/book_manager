@@ -33,6 +33,14 @@ module.exports = class Record {
     }
   }
 
+  importFormData(formData) {
+    let id = formData.get('id')
+    if (id !== '') {
+      this.id = id
+    }
+    // do the rest in the child
+  }
+
 
   save() {
     let all = this.constructor.all()

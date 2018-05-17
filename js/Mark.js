@@ -6,8 +6,9 @@ module.exports = class Mark extends Record {
   }
 
   importFormData(formData) {
-    this.name_of_book = formData.get('name_of_book')
+    super.importFormData(formData)
+    this.name = formData.get('name')
     this.page = formData.get('page')
-    this.date_read_at = formData.get('date_read_at')
+    this.read_at = formData.get('read_at')
   }
 }

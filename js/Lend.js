@@ -6,7 +6,8 @@ module.exports = class Lend extends Record {
   }
 
   importFormData(formData) {
-    this.nameBook = formData.get('nameBook')
+    super.importFormData(formData)
+    this.name = formData.get('name')
     this.people = formData.get('people')
     this.date = formData.get('date')
     this.action = formData.get('action')

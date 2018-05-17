@@ -136,6 +136,9 @@
             <td>
               <!-- Permet de recuperer l'id dans le formulaire
                         et le tag v-on:click correspond a un onclick en Vuejs -->
+              <button class="btn btn-warning" :id="fav.id" v-on:click="editFav">
+                                Modifier
+                              </button>
               <button class="btn btn-danger" :id="fav.id" v-on:click="deleteFav">
                       Supprimer
                     </button>
@@ -187,10 +190,13 @@
             <th>Action</th>
           </tr>
           <tr class="text-center" v-for="mark in marks">
-            <td>{{ mark.name_of_book }}</td>
+            <td>{{ mark.name }}</td>
             <td>{{ mark.page }}</td>
-            <td>{{ mark.date_read_at }}</td>
+            <td>{{ mark.read_at }}</td>
             <td>
+              <button class="btn btn-warning" :id="mark.id" v-on:click="editMark">
+                      Modifier
+                    </button>
               <button class="btn btn-danger" :id="mark.id" v-on:click="deleteMark">
                         Supprimer
                       </button>
@@ -210,8 +216,8 @@
         <form id="mark_form" @submit.prevent="saveMark">
           <input type="hidden" class="form-control" name="id">
           <div class="form-group">
-            <label for="name_of_book">Nom du livre</label>
-            <input type="text" class="form-control" name="name_of_book" placeholder="Harry Potter">
+            <label for="name">Nom du livre</label>
+            <input type="text" class="form-control" name="name" placeholder="Harry Potter">
           </div>
 
           <div class="form-group">
@@ -220,8 +226,8 @@
           </div>
 
           <div class="form-group">
-            <label for="date_read_at">Date dernière lecture</label>
-            <input type="date" class="form-control" name="date_read_at">
+            <label for="read_at">Date dernière lecture</label>
+            <input type="date" class="form-control" name="read_at">
           </div>
 
           <button type="submit" class="btn btn-primary">Ajouter votre marque-page</button>
@@ -241,11 +247,14 @@
             <th>Action</th>
           </tr>
           <tr class="text-center" v-for="lend in lends">
-            <td>{{ lend.nameBook }}</td>
-            <td> {{ lend.people }} </td>
+            <td>{{ lend.name }}</td>
+            <td>{{ lend.people }}</td>
             <td>{{ lend.date }}</td>
             <td>{{ lend.action }}</td>
             <td>
+              <button class="btn btn-warning" :id="lend.id" v-on:click="editLend">
+                      Modifier
+                    </button>
               <button class="btn btn-danger" :id="lend.id" v-on:click="deleteLend">
                       Supprimer
                     </button>
@@ -254,7 +263,7 @@
         </table>
 
         <p class="text-center">
-          <button class="btn btn-primary" v-on:click="newBook">Ajouter votre prêt</button>
+          <button class="btn btn-primary" v-on:click="newLend">Ajouter votre prêt</button>
           <button class="btn tbn-default" v-on:click="exportLends">Exporter</button>
         </p>
 
@@ -267,8 +276,8 @@
         <form id="lend_form" @submit.prevent="saveLend">
           <input type="hidden" class="form-control" name="id">
           <div class="form-group">
-            <label for="nameBook">Nom du livre</label>
-            <input type="text" class="form-control" name="nameBook" placeholder="Harry Potter">
+            <label for="name">Nom du livre</label>
+            <input type="text" class="form-control" name="name" placeholder="Harry Potter">
           </div>
 
           <div class="form-group">

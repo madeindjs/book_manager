@@ -7,10 +7,7 @@ module.exports = class Book extends Record {
   }
 
   importFormData(formData) {
-    let id = formData.get('id')
-    if (id !== '') {
-      this.id = id
-    }
+    super.importFormData(formData)
     this.name = formData.get('name')
     this.author = formData.get('author')
     this.editor = formData.get('editor')

@@ -6,6 +6,7 @@ module.exports = class Fav extends Record {
   }
 
   importFormData(formData) {
+    super.importFormData(formData)
     this.name = formData.get('name')
     this.author = formData.get('author')
     this.editor = formData.get('editor')

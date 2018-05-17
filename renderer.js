@@ -65,8 +65,6 @@ let appVue = new Vue({
     },
     editBook: function(e) {
       let book = Book.where('id', e.target.id)
-      console.log(book instanceof Record)
-      //book.fillForm('book_form')
       document.querySelector('#book_form input[name="id"]').value = book.id
       document.querySelector('#book_form input[name="name"]').value = book.name
       document.querySelector('#book_form input[name="author"]').value = book.author
@@ -74,6 +72,32 @@ let appVue = new Vue({
       document.querySelector('#book_form input[name="created_at"]').value = book.created_at
       document.querySelector('#book_form input[name="quantity"]').value = book.quantity
       viewHelper.showTab('new_book')
+    },
+    editFav: function(e) {
+      let fav = Fav.where('id', e.target.id)
+      document.querySelector('#fav_form input[name="id"]').value = fav.id
+      document.querySelector('#fav_form input[name="name"]').value = fav.name
+      document.querySelector('#fav_form input[name="author"]').value = fav.author
+      document.querySelector('#fav_form input[name="editor"]').value = fav.editor
+      viewHelper.showTab('new_fav')
+    },
+    editLend: function(e) {
+      let lend = Lend.where('id', e.target.id)
+      document.querySelector('#lend_form input[name="id"]').value = lend.id
+      document.querySelector('#lend_form input[name="name"]').value = lend.name
+      document.querySelector('#lend_form input[name="people"]').value = lend.people
+      document.querySelector('#lend_form input[name="date"]').value = lend.date
+      document.querySelector('#lend_form input[name="action"]').value = lend.action
+      viewHelper.showTab('new_lend')
+    },
+    editMark: function(e) {
+      let mark = Book.where('id', e.target.id)
+      //mark.fillForm('mark_form')
+      document.querySelector('#mark_form input[name="id"]').value = mark.id
+      document.querySelector('#mark_form input[name="name"]').value = mark.name
+      document.querySelector('#mark_form input[name="page"]').value = mark.page
+      document.querySelector('#mark_form input[name="read_at"]').value = mark.read_at
+      viewHelper.showTab('new_mark')
     },
     deleteBook: function(e) {
       // let book = Book.where('id', e.target.id)
@@ -241,7 +265,7 @@ let appVue = new Vue({
       switch (extension) {
         case 'csv':
           fileContent = allMarks.map((mark) => {
-              return mark.name_of_book + ";" + mark.page + ";" + mark.date_read_at + ";"
+              return mark.name + ";" + mark.page + ";" + mark.read_at + ";"
             })
             .join('\r\n')
           break;
@@ -303,7 +327,7 @@ let appVue = new Vue({
       switch (extension) {
         case 'csv':
           fileContent = allLends.map((lend) => {
-              return lend.nameBook + ";" + lend.people + ";" + lend.date + ";" + lend.action + ";"
+              return lend.name + ";" + lend.people + ";" + lend.date + ";" + lend.action + ";"
             })
             .join('\r\n')
           break;
