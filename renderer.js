@@ -151,6 +151,110 @@ let appVue = new Vue({
         }
       });
     },
+    exportMarks: function() {
+      // show save dialog
+      let savePath = dialog.showSaveDialog({
+        title: 'Exporter vos Marques-pages',
+        filters: [
+          {name: 'Fichier CSV', extensions: ['csv']},
+          {name: 'Fichier XML', extensions: ['xml']},
+          {name: 'Fichier JSON', extensions: ['json']},
+        ]
+      })
+
+      // stop execution if user not choose any file
+      if(savePath == undefined) {
+        alert('Merci de remplir une extension valide bordel!')
+        return
+      }
+
+      // get file extension
+      let extension = savePath.split('.').pop()
+      let fileContent = ''
+      let allMarks = Mark.all()
+
+      // fill fileContent following file extension
+      switch (extension) {
+        case 'csv':
+          fileContent = allMarks.map((mark) => {
+                               return mark.name_of_book + ";" + mark.page + ";" + mark.date_read_at + ";"
+                             })
+                            .join('\r\n')
+          break;
+        case 'xml':
+          fileContent = convert.js2xml(allMarks, {compact: true})
+          break;
+        case 'json':
+          fileContent = JSON.stringify(allMarks)
+          break;
+        default:
+          alert('Merci de remplir une extension valide bordel!')
+          return;
+      }
+
+      // create file with fileContent
+      fs.writeFile(savePath, fileContent, function(err) {
+        if(err) {
+          // handle error
+          alert("Le fichier n'a pas pu être sauvegardé")
+        }else {
+          // display success
+          alert("Le fichier a été sauvegardé")
+        }
+      });
+    },
+    exportLends: function() {
+      // show save dialog
+      let savePath = dialog.showSaveDialog({
+        title: 'Exporter vos emprunts',
+        filters: [
+          {name: 'Fichier CSV', extensions: ['csv']},
+          {name: 'Fichier XML', extensions: ['xml']},
+          {name: 'Fichier JSON', extensions: ['json']},
+        ]
+      })
+
+      // stop execution if user not choose any file
+      if(savePath == undefined) {
+        alert('Merci de remplir une extension valide bordel!')
+        return
+      }
+
+      // get file extension
+      let extension = savePath.split('.').pop()
+      let fileContent = ''
+      let allLends = Lend.all()
+
+      // fill fileContent following file extension
+      switch (extension) {
+        case 'csv':
+          fileContent = allLends.map((lend) => {
+                               return lend.nameBook + ";" + lend.people + ";" + lend.date + ";" + lend.action + ";"
+                             })
+                            .join('\r\n')
+          break;
+        case 'xml':
+          fileContent = convert.js2xml(allLends, {compact: true})
+          break;
+        case 'json':
+          fileContent = JSON.stringify(allLends)
+          break;
+        default:
+          alert('Merci de remplir une extension valide bordel!')
+          return;
+      }
+
+      // create file with fileContent
+      fs.writeFile(savePath, fileContent, function(err) {
+        if(err) {
+          // handle error
+          alert("Le fichier n'a pas pu être sauvegardé")
+        }else {
+          // display success
+          alert("Le fichier a été sauvegardé")
+        }
+      });
+    },
     addFav: function () {
       let fav = new Fav()
       fav.importFormData(new FormData(document.getElementById('fav_form')))
