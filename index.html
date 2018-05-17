@@ -1,306 +1,309 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="UTF-8">
-      <title>Apps-Book</title>
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/style.css">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    </head>
-    <body class="container-fluid text-center">
+<html>
 
-      <div id="app" class="row">
-        <aside class="col-xs-4 col-sm-3 col-md-2 bg-primary">
-          <ul class="list-unstyled">
+<head>
+  <meta charset="UTF-8">
+  <title>Apps-Book</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+</head>
 
-              <div class="square">
-               <i class="fas fa-book fa-3x"></i>
-               <li data-link="books">Livres</li>
-              </div>
+<body class="container-fluid text-center">
 
-              <div class="square">
-               <i class="far fa-star fa-3x"></i>
-               <li data-link="favs">Favoris</li>
-              </div>
+  <div id="app" class="row">
+    <aside class="col-xs-4 col-sm-3 col-md-2 bg-primary">
+      <ul class="list-unstyled">
 
-              <div class="square">
-               <i class="far fa-bookmark fa-3x"></i>
-               <li data-link="mark">Marques-pages</li>
-              </div>
-
-              <div class="square">
-               <i class="fas fa-exchange-alt fa-3x"></i>
-               <li data-link="lend">Prêts</li>
-              </div>
-
-          </ul>
-        </aside>
-
-        <div class="logo">
+        <div class="square">
+          <i class="fas fa-book fa-3x"></i>
+          <li data-link="books">Livres</li>
         </div>
 
-        <main class="col-xs-8 col-sm-9 col-md-10">
+        <div class="square">
+          <i class="far fa-star fa-3x"></i>
+          <li data-link="favs">Favoris</li>
+        </div>
 
-          <!-- display books -->
-          <section data-view="books">
-            <h1 class="text-primary">Livres</h1>
-            <table class="table">
-              <tr>
-                <th>Nom du livre : </th>
-                <th>Autheur</th>
-                <th>Editeur</th>
-                <th>Date de publication</th>
-                <th>Quantité</th>
-                <th>Actions</th>
-              </tr>
-              <tr class="text-center" v-for="book in books">
-                  <td>{{ book.name }}</td>
-                  <td>{{ book.author }}</td>
-                  <td>{{ book.editor }}</td>
-                  <td>{{ book.created_at }}</td>
-                  <td>{{ book.quantity }}</td>
-                  <td>
-                    <button class="btn btn-warning" :id="book.id" v-on:click="editBook">
+        <div class="square">
+          <i class="far fa-bookmark fa-3x"></i>
+          <li data-link="mark">Marques-pages</li>
+        </div>
+
+        <div class="square">
+          <i class="fas fa-exchange-alt fa-3x"></i>
+          <li data-link="lend">Prêts</li>
+        </div>
+
+      </ul>
+    </aside>
+
+    <div class="logo">
+    </div>
+
+    <main class="col-xs-8 col-sm-9 col-md-10">
+
+      <!-- display books -->
+      <section data-view="books">
+        <h1 class="text-primary">Livres</h1>
+        <table class="table">
+          <tr>
+            <th>Nom du livre : </th>
+            <th>Autheur</th>
+            <th>Editeur</th>
+            <th>Date de publication</th>
+            <th>Quantité</th>
+            <th>Actions</th>
+          </tr>
+          <tr class="text-center" v-for="book in books">
+            <td>{{ book.name }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.editor }}</td>
+            <td>{{ book.created_at }}</td>
+            <td>{{ book.quantity }}</td>
+            <td>
+              <button class="btn btn-warning" :id="book.id" v-on:click="editBook">
                       Modifier
                     </button>
-                    <button class="btn btn-danger" :id="book.id" v-on:click="deleteBook">
+              <button class="btn btn-danger" :id="book.id" v-on:click="deleteBook">
                       Supprimer
                     </button>
-                  </td>
-              </tr>
-            </table>
+            </td>
+          </tr>
+        </table>
 
-            <p class="text-center">
-              <button class="btn btn-primary" v-on:click="newBook">Ajouter livre</button>
-              <button class="btn tbn-default" v-on:click="exportBooks">Exporter</button>
-            </p>
+        <p class="text-center">
+          <button class="btn btn-primary" v-on:click="newBook">Ajouter livre</button>
+          <button class="btn tbn-default" v-on:click="exportBooks">Exporter</button>
+        </p>
 
-          </section>
+      </section>
 
-          <!-- create book -->
-          <section data-view="new_book" class="hidden">
-            <h1 class="text-primary">Sauvegarder un livre</h1>
+      <!-- create book -->
+      <section data-view="new_book" class="hidden">
+        <h1 class="text-primary">Sauvegarder un livre</h1>
 
-            <form id="book_form" @submit.prevent="saveBook">
-              <input type="hidden" class="form-control" name="id">
+        <form id="book_form" @submit.prevent="saveBook">
+          <input type="hidden" class="form-control" name="id">
 
-              <div class="form-group">
-                <label for="name">Nom du livre</label>
-                <input type="text" class="form-control" name="name" placeholder="Harry Potter">
-              </div>
+          <div class="form-group">
+            <label for="name">Nom du livre</label>
+            <input type="text" class="form-control" name="name" placeholder="Harry Potter">
+          </div>
 
-              <div class="form-group">
-                <label for="author">Autheur</label>
-                <input type="text" class="form-control" name="author" placeholder="JK. Rowling">
-              </div>
+          <div class="form-group">
+            <label for="author">Autheur</label>
+            <input type="text" class="form-control" name="author" placeholder="JK. Rowling">
+          </div>
 
-              <div class="form-group">
-                <label for="editor">Editeur</label>
-                <input type="text" class="form-control" name="editor" placeholder="Galimard">
-              </div>
+          <div class="form-group">
+            <label for="editor">Editeur</label>
+            <input type="text" class="form-control" name="editor" placeholder="Galimard">
+          </div>
 
 
-              <div class="form-group">
-                <label for="created_at">Date de publication : </label>
-                <input type="date" class="form-control" name="created_at">
-              </div>
+          <div class="form-group">
+            <label for="created_at">Date de publication : </label>
+            <input type="date" class="form-control" name="created_at">
+          </div>
 
-              <div class="form-group">
-                <label for="quantity">Quantité : </label>
-                <input type="number " class="form-control" name="quantity" placeholder="2">
-              </div>
+          <div class="form-group">
+            <label for="quantity">Quantité : </label>
+            <input type="number " class="form-control" name="quantity" placeholder="2">
+          </div>
 
-              <button type="submit" class="btn btn-primary">Sauvegarder</button>
+          <button type="submit" class="btn btn-primary">Sauvegarder</button>
 
-            </form>
+        </form>
 
-          </section>
+      </section>
 
-          <section data-view="favs" class="hidden">
-            <h1 class="text-primary">Favoris</h1>
-            <table class="table">
-              <tr class="text-center">
-                <th>Nom</th>
-                <th>Autheur</th>
-                <th>Editeur</th>
-                <th>Action</th>
-              </tr>
-              <!-- Utilisation du framework Vuejs
+      <section data-view="favs" class="hidden">
+        <h1 class="text-primary">Favoris</h1>
+        <table class="table">
+          <tr class="text-center">
+            <th>Nom</th>
+            <th>Autheur</th>
+            <th>Editeur</th>
+            <th>Action</th>
+          </tr>
+          <!-- Utilisation du framework Vuejs
                   le tag v-for corresponda un foreach du formulaire fav_form   -->
-              <tr class="text-center" v-for="fav in favs">
-                  <td>{{ fav.name }}</td>
-                  <td>{{ fav.author }}</td>
-                  <td>{{ fav.editor }}</td>
-                  <td>
-                        <!-- Permet de recuperer l'id dans le formulaire
+          <tr class="text-center" v-for="fav in favs">
+            <td>{{ fav.name }}</td>
+            <td>{{ fav.author }}</td>
+            <td>{{ fav.editor }}</td>
+            <td>
+              <!-- Permet de recuperer l'id dans le formulaire
                         et le tag v-on:click correspond a un onclick en Vuejs -->
-                    <button class="btn btn-danger" :id="fav.id" v-on:click="deleteFav">
+              <button class="btn btn-danger" :id="fav.id" v-on:click="deleteFav">
                       Supprimer
                     </button>
-                  </td>
-              </tr>
-            </table>
+            </td>
+          </tr>
+        </table>
 
-            <p class="text-center">
-              <button id="new_favs_button" type="button" name="button" class="btn btn-primary">Ajouter un favoris</button>
-              <button class="btn tbn-default" v-on:click="exportFavs">Exporter</button>
-            </p>
+        <p class="text-center">
+          <button id="new_favs_button" type="button" name="button" class="btn btn-primary">Ajouter un favoris</button>
+          <button class="btn tbn-default" v-on:click="exportFavs">Exporter</button>
+        </p>
 
-          </section>
+      </section>
 
-          <section data-view="add_fav" class="hidden" >
+      <section data-view="add_fav" class="hidden">
 
-            <h1 class="text-primary">Ajouter votre livre favoris</h1>
-            <!-- On ajoute un id sur le formualaire afin de le recuperer
+        <h1 class="text-primary">Ajouter votre livre favoris</h1>
+        <!-- On ajoute un id sur le formualaire afin de le recuperer
                 On fait appel a la méthode qui a été Sauvegarder dans renderer  -->
-            <form id ="fav_form" @submit.prevent="addFav">
-              <div class="form-group">
-                <label for="name">Nom du livre : </label>
-                <input type="text" class="form-control" name="name" placeholder="Harry Potter">
-              </div>
+        <form id="fav_form" @submit.prevent="addFav">
+          <div class="form-group">
+            <label for="name">Nom du livre : </label>
+            <input type="text" class="form-control" name="name" placeholder="Harry Potter">
+          </div>
 
-              <div class="form-group">
-                <label for="author">Autheur : </label>
-                <input type="text" class="form-control" name="author" placeholder="J.K. Rowling">
-              </div>
+          <div class="form-group">
+            <label for="author">Autheur : </label>
+            <input type="text" class="form-control" name="author" placeholder="J.K. Rowling">
+          </div>
 
-              <div class="form-group">
-                <label for="editor">Editeur : </label>
-                <input type="text" class="form-control" name="editor" placeholder="Gallimard">
-              </div>
+          <div class="form-group">
+            <label for="editor">Editeur : </label>
+            <input type="text" class="form-control" name="editor" placeholder="Gallimard">
+          </div>
 
-              <button type="submit" class="btn btn-primary">Ajouter votre livre</button>
+          <button type="submit" class="btn btn-primary">Ajouter votre livre</button>
 
-            </form>
+        </form>
 
-          </section>
+      </section>
 
-          <section data-view="mark" class="hidden">
-            <h1 class="text-primary">Marques-pages</h1>
-              <table class="table">
-                <tr>
-                  <th>Nom du Livre : </th>
-                  <th>Page : </th>
-                  <th>Date derniere lecture : </th>
-                  <th>Action : </th>
-                </tr>
-                <tr class="text-center" v-for="mark in marks">
-                    <td>{{ mark.name_of_book }}</td>
-                    <td>{{ mark.page }}</td>
-                    <td>{{ mark.date_read_at }}</td>
-                    <td>
-                      <button class="btn btn-danger" :id="mark.id" v-on:click="deleteMark">
+      <section data-view="mark" class="hidden">
+        <h1 class="text-primary">Marques-pages</h1>
+        <table class="table">
+          <tr>
+            <th>Nom du Livre : </th>
+            <th>Page : </th>
+            <th>Date derniere lecture : </th>
+            <th>Action : </th>
+          </tr>
+          <tr class="text-center" v-for="mark in marks">
+            <td>{{ mark.name_of_book }}</td>
+            <td>{{ mark.page }}</td>
+            <td>{{ mark.date_read_at }}</td>
+            <td>
+              <button class="btn btn-danger" :id="mark.id" v-on:click="deleteMark">
                         Supprimer
                       </button>
-                    </td>
-                </tr>
-              </table>
+            </td>
+          </tr>
+        </table>
 
-            <p class="text-center">
-              <button id="new_mark_button" type="button" name="button" class="btn btn-primary">Ajouter votre marque-page</button>
-              <button class="btn tbn-default" v-on:click="exportMarks">Exporter</button>
-            </p>
+        <p class="text-center">
+          <button id="new_mark_button" type="button" name="button" class="btn btn-primary">Ajouter votre marque-page</button>
+          <button class="btn tbn-default" v-on:click="exportMarks">Exporter</button>
+        </p>
 
-          </section>
+      </section>
 
-          <section data-view="new_mark" class="hidden">
-            <h1 class="text-primary"> Ajouter votre marques-pages : </h1>
-            <form id= "mark_form" @submit.prevent= "addMark">
-              <div class="form-group">
-                <label for="name_of_book">Nom du livre : </label>
-                <input type="text" class="form-control" name="name_of_book" placeholder="Harry Potter">
-              </div>
+      <section data-view="new_mark" class="hidden">
+        <h1 class="text-primary"> Ajouter votre marques-pages : </h1>
+        <form id="mark_form" @submit.prevent="addMark">
+          <div class="form-group">
+            <label for="name_of_book">Nom du livre : </label>
+            <input type="text" class="form-control" name="name_of_book" placeholder="Harry Potter">
+          </div>
 
-              <div class="form-group">
-                <label for="page">Page : </label>
-                <input type="number" class="form-control" name="page" placeholder="2">
-              </div>
+          <div class="form-group">
+            <label for="page">Page : </label>
+            <input type="number" class="form-control" name="page" placeholder="2">
+          </div>
 
-              <div class="form-group">
-                <label for="date_read_at">Date dernière lecture : </label>
-                <input type="date" class="form-control" name="date_read_at">
-              </div>
+          <div class="form-group">
+            <label for="date_read_at">Date dernière lecture : </label>
+            <input type="date" class="form-control" name="date_read_at">
+          </div>
 
-              <button type="submit" class="btn btn-primary">Ajouter votre marque-page</button>
+          <button type="submit" class="btn btn-primary">Ajouter votre marque-page</button>
 
-            </form>
-          </section>
+        </form>
+      </section>
 
-          <section data-view="lend" class="hidden">
-            <h1 class="text-primary">Prêts</h1>
+      <section data-view="lend" class="hidden">
+        <h1 class="text-primary">Prêts</h1>
 
-            <table class="table">
-              <tr>
-                <th>Nom du Livre : </th>
-                <th>Personne : </th>
-                <th>Date : </th>
-                <th>Pret : </th>
-                <th>Action : </th>
-              </tr>
-              <tr class="text-center" v-for="lend in lends">
-                  <td>{{ lend.nameBook }}</td>
-                  <td> {{ lend.people }} </td>
-                  <td>{{ lend.date }}</td>
-                  <td>{{ lend.action }}</td>
-                  <td>
-                    <button class="btn btn-danger" :id="lend.id" v-on:click="deleteLend">
+        <table class="table">
+          <tr>
+            <th>Nom du Livre : </th>
+            <th>Personne : </th>
+            <th>Date : </th>
+            <th>Pret : </th>
+            <th>Action : </th>
+          </tr>
+          <tr class="text-center" v-for="lend in lends">
+            <td>{{ lend.nameBook }}</td>
+            <td> {{ lend.people }} </td>
+            <td>{{ lend.date }}</td>
+            <td>{{ lend.action }}</td>
+            <td>
+              <button class="btn btn-danger" :id="lend.id" v-on:click="deleteLend">
                       Supprimer
                     </button>
-                  </td>
-              </tr>
-            </table>
+            </td>
+          </tr>
+        </table>
 
-            <p class="text-center">
-              <button id="new_lend_button" type="button" name="button" class="btn btn-primary">Ajouter votre prêt</button>
-              <button class="btn tbn-default" v-on:click="exportLends">Exporter</button>
-            </p>
+        <p class="text-center">
+          <button id="new_lend_button" type="button" name="button" class="btn btn-primary">Ajouter votre prêt</button>
+          <button class="btn tbn-default" v-on:click="exportLends">Exporter</button>
+        </p>
 
-          </section >
+      </section>
 
-          <section data-view="new_lend" class="hidden">
+      <section data-view="new_lend" class="hidden">
 
-            <h1 class="text-primary"> Ajouter votre prêt</h1>
+        <h1 class="text-primary"> Ajouter votre prêt</h1>
 
-            <form id="lend_form" @submit.prevent="addLend">
-              <div class="form-group">
-                <label for="nameBook">Nom du livre : </label>
-                <input type="text" class="form-control" name="nameBook" placeholder="Harry Potter">
-              </div>
+        <form id="lend_form" @submit.prevent="addLend">
+          <div class="form-group">
+            <label for="nameBook">Nom du livre : </label>
+            <input type="text" class="form-control" name="nameBook" placeholder="Harry Potter">
+          </div>
 
-              <div class="form-group">
-                <label for="people">Personne : </label>
-                <input type="text" class="form-control" name="people" placeholder="hoodini">
-              </div>
+          <div class="form-group">
+            <label for="people">Personne : </label>
+            <input type="text" class="form-control" name="people" placeholder="hoodini">
+          </div>
 
-              <div class="form-group">
-                <label for="date">Date : </label>
-                <input type="date" class="form-control" name="date">
-              </div>
+          <div class="form-group">
+            <label for="date">Date : </label>
+            <input type="date" class="form-control" name="date">
+          </div>
 
-              <div class="form-group">
-                <label for="lend">Prêt : </label>
-                  <select name="action" class="form-control">
+          <div class="form-group">
+            <label for="lend">Prêt : </label>
+            <select name="action" class="form-control">
                    <option value="Emprunter" >Emprunter</option>
                    <option value="Retour">Retour</option>
                   </select>
-              </div>
+          </div>
 
-              <button type="submit" class="btn btn-primary">Ajouter votre emprunt</button>
+          <button type="submit" class="btn btn-primary">Ajouter votre emprunt</button>
 
-            </form>
-          </section>
+        </form>
+      </section>
 
-        </main>
+    </main>
 
-      </div>
+  </div>
 
 
-      <!-- Ajout du CDN pour utiliser le framework js Vuejs -->
-      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-      <!-- <script type="text/javascript" src="./js/ViewHelper.js"></script> -->
+  <!-- Ajout du CDN pour utiliser le framework js Vuejs -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <!-- <script type="text/javascript" src="./js/ViewHelper.js"></script> -->
 
-      <script>
-        require('./renderer.js')
-      </script>
-    </body>
-  </html>
+  <script>
+    require('./renderer.js')
+  </script>
+</body>
+
+</html>
