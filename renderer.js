@@ -1,4 +1,6 @@
-const {dialog} = require("electron").remote;
+const {
+  dialog
+} = require("electron").remote;
 const fs = require('fs')
 const convert = require('xml-js')
 
@@ -7,6 +9,8 @@ const Book = require('./js/Book.js')
 const Fav = require('./js/Fav.js')
 const Mark = require('./js/Mark.js')
 const Lend = require('./js/Lend.js')
+const Record = require('./js/Record.js')
+
 
 
 // utilisation de Vuejs
@@ -24,7 +28,13 @@ let appVue = new Vue({
   /* methods correspond, au function d'ajout ou de suppression
   et les utiliser dans l'index au niveau @prevent.submit des formulaire */
   methods: {
-    addBook: function () {
+    newBook: function() {
+      document.querySelectorAll('#book_form input').forEach((input) => {
+        input.value = ''
+      })
+      viewHelper.showTab('new_book')
+    },
+    saveBook: function() {
       let book = new Book()
       /* on importe les donnée  saisie du formulaire a partir de Book.js et
       en  passant par l'id du formulaire en question */
@@ -35,9 +45,16 @@ let appVue = new Vue({
       // On affiche l'onglet en question  grace a la méthode showTab
       viewHelper.showTab('books')
     },
-    updateBook: function(e) {
+    editBook: function(e) {
       let book = Book.where('id', e.target.id)
+      console.log(book instanceof Record)
+      //book.fillForm('book_form')
+      document.querySelector('#book_form input[name="id"]').value = book.id
       document.querySelector('#book_form input[name="name"]').value = book.name
+      document.querySelector('#book_form input[name="author"]').value = book.author
+      document.querySelector('#book_form input[name="editor"]').value = book.editor
+      document.querySelector('#book_form input[name="created_at"]').value = book.created_at
+      document.querySelector('#book_form input[name="quantity"]').value = book.quantity
       viewHelper.showTab('new_book')
     },
     deleteBook: function(e) {
@@ -51,15 +68,23 @@ let appVue = new Vue({
       // show save dialog
       let savePath = dialog.showSaveDialog({
         title: 'Exporter les livres',
-        filters: [
-          {name: 'Fichier CSV', extensions: ['csv']},
-          {name: 'Fichier XML', extensions: ['xml']},
-          {name: 'Fichier JSON', extensions: ['json']},
+        filters: [{
+            name: 'Fichier CSV',
+            extensions: ['csv']
+          },
+          {
+            name: 'Fichier XML',
+            extensions: ['xml']
+          },
+          {
+            name: 'Fichier JSON',
+            extensions: ['json']
+          },
         ]
       })
 
       // stop execution if user not choose any file
-      if(savePath == undefined) {
+      if (savePath == undefined) {
         alert('Merci de remplir une extension valide bordel!')
         return
       }
@@ -73,12 +98,14 @@ let appVue = new Vue({
       switch (extension) {
         case 'csv':
           fileContent = allBooks.map((book) => {
-                               return book.name + ";" + book.author + ";" + book.editor + ";" + book.created_at + ";" + book.quantity
-                             })
-                            .join('\r\n')
+              return book.name + ";" + book.author + ";" + book.editor + ";" + book.created_at + ";" + book.quantity
+            })
+            .join('\r\n')
           break;
         case 'xml':
-          fileContent = convert.js2xml(allBooks, {compact: true})
+          fileContent = convert.js2xml(allBooks, {
+            compact: true
+          })
           break;
         case 'json':
           fileContent = JSON.stringify(allBooks)
@@ -88,27 +115,26 @@ let appVue = new Vue({
           return;
       }
 
+
       // create file with fileContent
       fs.writeFile(savePath, fileContent, function(err) {
-        if(err) {
+        if (err) {
           // handle error
           alert("Le fichier n'a pas pu être sauvegardé")
-        }else {
+        } else {
           // display success
           alert("Le fichier a été sauvegardé")
         }
       });
     },
-    addFav: function () {
+    addFav: function() {
       let fav = new Fav()
       fav.importFormData(new FormData(document.getElementById('fav_form')))
       fav.save()
-
       viewHelper.showTab('favs')
-
       this.favs = Fav.all()
     },
-    addMark: function () {
+    addMark: function() {
       let mark = new Mark()
       mark.importFormData(new FormData(document.getElementById('mark_form')))
       mark.save()
@@ -117,7 +143,7 @@ let appVue = new Vue({
 
       this.marks = Mark.all()
     },
-    addLend: function () {
+    addLend: function() {
       let lend = new Lend()
       lend.importFormData(new FormData(document.getElementById('lend_form')))
       lend.save()
@@ -154,15 +180,11 @@ let viewHelper = new ViewHelper()
 
 document.querySelector('aside ul').addEventListener('click', (e) => {
   let target = e.target
-  if(e.target.nodeName == 'LI'){
+  if (e.target.nodeName == 'LI') {
     viewHelper.showTab(e.target.dataset.link)
   }
 })
 
-// onclick, permettant de cibler l'id du bouton en question et d'afficher l'onglet correspondant
-document.getElementById('new_book_button').addEventListener('click', (e) => {
-  viewHelper.showTab('new_book')
-})
 
 document.getElementById('new_favs_button').addEventListener('click', (e) => {
   viewHelper.showTab('add_fav');

@@ -41,6 +41,7 @@
 
         <main class="col-xs-8 col-sm-9 col-md-10">
 
+          <!-- display books -->
           <section data-view="books">
             <h1 class="text-primary">Livres</h1>
             <table class="table">
@@ -59,7 +60,7 @@
                   <td>{{ book.created_at }}</td>
                   <td>{{ book.quantity }}</td>
                   <td>
-                    <button class="btn btn-warning" :id="book.id" v-on:click="updateBook">
+                    <button class="btn btn-warning" :id="book.id" v-on:click="editBook">
                       Modifier
                     </button>
                     <button class="btn btn-danger" :id="book.id" v-on:click="deleteBook">
@@ -70,16 +71,19 @@
             </table>
 
             <p class="text-center">
-              <button id="new_book_button" type="button" name="button" class="btn btn-primary">Ajouter livre</button>
+              <button class="btn btn-primary" v-on:click="newBook">Ajouter livre</button>
               <button class="btn tbn-default" v-on:click="exportBooks">Exporter</button>
             </p>
 
           </section>
 
+          <!-- create book -->
           <section data-view="new_book" class="hidden">
-            <h1 class="text-primary">Créer un livre</h1>
+            <h1 class="text-primary">Sauvegarder un livre</h1>
 
-            <form id="book_form" @submit.prevent="addBook">
+            <form id="book_form" @submit.prevent="saveBook">
+              <input type="hidden" class="form-control" name="id">
+
               <div class="form-group">
                 <label for="name">Nom du livre</label>
                 <input type="text" class="form-control" name="name" placeholder="Harry Potter">
@@ -106,7 +110,7 @@
                 <input type="number " class="form-control" name="quantity" placeholder="2">
               </div>
 
-              <button type="submit" class="btn btn-primary">Créer</button>
+              <button type="submit" class="btn btn-primary">Sauvegarder</button>
 
             </form>
 
@@ -147,7 +151,7 @@
 
             <h1 class="text-primary">Ajouter votre livre favoris</h1>
             <!-- On ajoute un id sur le formualaire afin de le recuperer
-                On fait appel a la méthode qui a été créer dans renderer  -->
+                On fait appel a la méthode qui a été Sauvegarder dans renderer  -->
             <form id ="fav_form" @submit.prevent="addFav">
               <div class="form-group">
                 <label for="name">Nom du livre : </label>
