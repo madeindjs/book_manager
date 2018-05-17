@@ -76,7 +76,7 @@ let appVue = new Vue({
     editFav: function(e) {
       let fav = Fav.where('id', e.target.id)
       document.querySelector('#fav_form input[name="id"]').value = fav.id
-      document.querySelector('#fav_form input[name="name"]').value = fav.name
+      document.querySelector('#fav_form select[name="name"]').value = fav.name
       document.querySelector('#fav_form input[name="author"]').value = fav.author
       document.querySelector('#fav_form input[name="editor"]').value = fav.editor
       viewHelper.showTab('new_fav')
@@ -87,12 +87,11 @@ let appVue = new Vue({
       document.querySelector('#lend_form input[name="name"]').value = lend.name
       document.querySelector('#lend_form input[name="people"]').value = lend.people
       document.querySelector('#lend_form input[name="date"]').value = lend.date
-      document.querySelector('#lend_form input[name="action"]').value = lend.action
+      document.querySelector('#lend_form select[name="action"]').value = lend.action
       viewHelper.showTab('new_lend')
     },
     editMark: function(e) {
-      let mark = Book.where('id', e.target.id)
-      //mark.fillForm('mark_form')
+      let mark = Mark.where('id', e.target.id)
       document.querySelector('#mark_form input[name="id"]').value = mark.id
       document.querySelector('#mark_form input[name="name"]').value = mark.name
       document.querySelector('#mark_form input[name="page"]').value = mark.page
