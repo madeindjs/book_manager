@@ -34,6 +34,24 @@ let appVue = new Vue({
       })
       viewHelper.showTab('new_book')
     },
+    newFav: function() {
+      document.querySelectorAll('#fav_form input').forEach((input) => {
+        input.value = ''
+      })
+      viewHelper.showTab('new_fav')
+    },
+    newLend: function() {
+      document.querySelectorAll('#lend_form input').forEach((input) => {
+        input.value = ''
+      })
+      viewHelper.showTab('new_lend')
+    },
+    newMark: function() {
+      document.querySelectorAll('#mark_form input').forEach((input) => {
+        input.value = ''
+      })
+      viewHelper.showTab('new_mark')
+    },
     saveBook: function() {
       let book = new Book()
       /* on importe les donnée  saisie du formulaire a partir de Book.js et
@@ -313,14 +331,14 @@ let appVue = new Vue({
         }
       });
     },
-    addFav: function() {
+    saveFav: function() {
       let fav = new Fav()
       fav.importFormData(new FormData(document.getElementById('fav_form')))
       fav.save()
       viewHelper.showTab('favs')
       this.favs = Fav.all()
     },
-    addMark: function() {
+    saveMark: function() {
       let mark = new Mark()
       mark.importFormData(new FormData(document.getElementById('mark_form')))
       mark.save()
@@ -329,7 +347,7 @@ let appVue = new Vue({
 
       this.marks = Mark.all()
     },
-    addLend: function() {
+    saveLend: function() {
       let lend = new Lend()
       lend.importFormData(new FormData(document.getElementById('lend_form')))
       lend.save()
@@ -369,17 +387,4 @@ document.querySelector('aside ul').addEventListener('click', (e) => {
   if (e.target.nodeName == 'LI') {
     viewHelper.showTab(e.target.dataset.link)
   }
-})
-
-
-document.getElementById('new_favs_button').addEventListener('click', (e) => {
-  viewHelper.showTab('add_fav');
-})
-
-document.getElementById('new_mark_button').addEventListener('click', (e) => {
-  viewHelper.showTab('new_mark');
-})
-
-document.getElementById('new_lend_button').addEventListener('click', (e) => {
-  viewHelper.showTab('new_lend');
 })

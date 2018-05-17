@@ -48,7 +48,7 @@
         <h1 class="text-primary">Livres</h1>
         <table class="table">
           <tr>
-            <th>Nom du livre : </th>
+            <th>Nom du livre</th>
             <th>Autheur</th>
             <th>Editeur</th>
             <th>Date de publication</th>
@@ -103,12 +103,12 @@
 
 
           <div class="form-group">
-            <label for="created_at">Date de publication : </label>
+            <label for="created_at">Date de publication</label>
             <input type="date" class="form-control" name="created_at">
           </div>
 
           <div class="form-group">
-            <label for="quantity">Quantité : </label>
+            <label for="quantity">Quantité</label>
             <input type="number " class="form-control" name="quantity" placeholder="2">
           </div>
 
@@ -144,47 +144,47 @@
         </table>
 
         <p class="text-center">
-          <button id="new_favs_button" type="button" name="button" class="btn btn-primary">Ajouter un favoris</button>
+          <button class="btn btn-primary" v-on:click="newFav">Ajouter un favoris</button>
           <button class="btn tbn-default" v-on:click="exportFavs">Exporter</button>
         </p>
 
       </section>
 
-      <section data-view="add_fav" class="hidden">
+      <section data-view="new_fav" class="hidden">
 
         <h1 class="text-primary">Ajouter votre livre favoris</h1>
         <!-- On ajoute un id sur le formualaire afin de le recuperer
                 On fait appel a la méthode qui a été Sauvegarder dans renderer  -->
-        <form id="fav_form" @submit.prevent="addFav">
+        <form id="fav_form" @submit.prevent="saveFav">
+          <input type="hidden" class="form-control" name="id">
           <div class="form-group">
-            <label for="name">Nom du livre : </label>
+            <label for="name">Nom du livre</label>
             <input type="text" class="form-control" name="name" placeholder="Harry Potter">
           </div>
 
           <div class="form-group">
-            <label for="author">Autheur : </label>
+            <label for="author">Autheur</label>
             <input type="text" class="form-control" name="author" placeholder="J.K. Rowling">
           </div>
 
           <div class="form-group">
-            <label for="editor">Editeur : </label>
+            <label for="editor">Editeur</label>
             <input type="text" class="form-control" name="editor" placeholder="Gallimard">
           </div>
 
           <button type="submit" class="btn btn-primary">Ajouter votre livre</button>
 
         </form>
-
       </section>
 
       <section data-view="mark" class="hidden">
         <h1 class="text-primary">Marques-pages</h1>
         <table class="table">
           <tr>
-            <th>Nom du Livre : </th>
-            <th>Page : </th>
-            <th>Date derniere lecture : </th>
-            <th>Action : </th>
+            <th>Nom du Livre</th>
+            <th>Page</th>
+            <th>Date derniere lecture</th>
+            <th>Action</th>
           </tr>
           <tr class="text-center" v-for="mark in marks">
             <td>{{ mark.name_of_book }}</td>
@@ -199,27 +199,28 @@
         </table>
 
         <p class="text-center">
-          <button id="new_mark_button" type="button" name="button" class="btn btn-primary">Ajouter votre marque-page</button>
+          <button class="btn btn-primary" v-on:click="newMark">Ajouter votre marque-page</button>
           <button class="btn tbn-default" v-on:click="exportMarks">Exporter</button>
         </p>
 
       </section>
 
       <section data-view="new_mark" class="hidden">
-        <h1 class="text-primary"> Ajouter votre marques-pages : </h1>
-        <form id="mark_form" @submit.prevent="addMark">
+        <h1 class="text-primary"> Ajouter votre marques-pages</h1>
+        <form id="mark_form" @submit.prevent="saveMark">
+          <input type="hidden" class="form-control" name="id">
           <div class="form-group">
-            <label for="name_of_book">Nom du livre : </label>
+            <label for="name_of_book">Nom du livre</label>
             <input type="text" class="form-control" name="name_of_book" placeholder="Harry Potter">
           </div>
 
           <div class="form-group">
-            <label for="page">Page : </label>
+            <label for="page">Page</label>
             <input type="number" class="form-control" name="page" placeholder="2">
           </div>
 
           <div class="form-group">
-            <label for="date_read_at">Date dernière lecture : </label>
+            <label for="date_read_at">Date dernière lecture</label>
             <input type="date" class="form-control" name="date_read_at">
           </div>
 
@@ -233,11 +234,11 @@
 
         <table class="table">
           <tr>
-            <th>Nom du Livre : </th>
-            <th>Personne : </th>
-            <th>Date : </th>
-            <th>Pret : </th>
-            <th>Action : </th>
+            <th>Nom du Livre</th>
+            <th>Personne</th>
+            <th>Date</th>
+            <th>Pret</th>
+            <th>Action</th>
           </tr>
           <tr class="text-center" v-for="lend in lends">
             <td>{{ lend.nameBook }}</td>
@@ -253,7 +254,7 @@
         </table>
 
         <p class="text-center">
-          <button id="new_lend_button" type="button" name="button" class="btn btn-primary">Ajouter votre prêt</button>
+          <button class="btn btn-primary" v-on:click="newBook">Ajouter votre prêt</button>
           <button class="btn tbn-default" v-on:click="exportLends">Exporter</button>
         </p>
 
@@ -263,24 +264,25 @@
 
         <h1 class="text-primary"> Ajouter votre prêt</h1>
 
-        <form id="lend_form" @submit.prevent="addLend">
+        <form id="lend_form" @submit.prevent="saveLend">
+          <input type="hidden" class="form-control" name="id">
           <div class="form-group">
-            <label for="nameBook">Nom du livre : </label>
+            <label for="nameBook">Nom du livre</label>
             <input type="text" class="form-control" name="nameBook" placeholder="Harry Potter">
           </div>
 
           <div class="form-group">
-            <label for="people">Personne : </label>
+            <label for="people">Personne</label>
             <input type="text" class="form-control" name="people" placeholder="hoodini">
           </div>
 
           <div class="form-group">
-            <label for="date">Date : </label>
+            <label for="date">Date</label>
             <input type="date" class="form-control" name="date">
           </div>
 
           <div class="form-group">
-            <label for="lend">Prêt : </label>
+            <label for="lend">Prêt</label>
             <select name="action" class="form-control">
                    <option value="Emprunter" >Emprunter</option>
                    <option value="Retour">Retour</option>
@@ -291,7 +293,6 @@
 
         </form>
       </section>
-
     </main>
 
   </div>
